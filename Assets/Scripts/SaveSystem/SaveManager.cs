@@ -38,7 +38,7 @@ public class SaveManager : MonoBehaviour
 
     void Start()
     {
-        Debug.Log(JsonUtility.ToJson(gameData));
+        
     }
 
     object GetValue(string itemLabel)
@@ -127,12 +127,30 @@ public class SaveManager : MonoBehaviour
         SaveManager.Instance.UpdateData(propertie.label, propertie.GetValue());
     }
 
+    public static void Save(SavePropertieProfile propertie)
+    {
+        if (!SaveManager.HasInstance)
+        {
+            Debug.LogWarning("No SaveManager Instance");
+            return;
+        }
+
+        SaveManager.Instance.UpdateData(propertie.label, propertie.GetValue());
+    }
+
     public static object Load(string itemLabel)
     {
         return SaveManager.Instance.GetValue(itemLabel);
     }
 
     public static object Load(SavePropertie propertie)
+    {
+        var value = SaveManager.Instance.GetValue(propertie.label);
+        propertie.SetValue(value);
+        return value;
+    }
+
+    public static object Load(SavePropertieProfile propertie)
     {
         var value = SaveManager.Instance.GetValue(propertie.label);
         propertie.SetValue(value);

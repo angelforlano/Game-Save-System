@@ -5,12 +5,9 @@ using UnityEngine;
 public abstract class SavePropertieProfile : ScriptableObject
 {
     public string label;
-}
 
-[CreateAssetMenu(fileName = "SavePropertieProfile", menuName = "Game-Save-System/Int Save Propertie", order = 0)]
-public class IntSavePropertieProfile : SavePropertieProfile
-{
-    public int value;
+    public abstract object GetValue();
+    public abstract void SetValue(object value);
 }
 
 [System.Serializable]

@@ -34,4 +34,12 @@ public static class FileManager
             return gameData;
         }
     }
+
+    public static void ResetDataFile()
+    {
+        GameData gameData = new GameData();
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream stream = new FileStream(Application.persistentDataPath + fileName, FileMode.Create);
+        bf.Serialize(stream, gameData);
+    }
 }
